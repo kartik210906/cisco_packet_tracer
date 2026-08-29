@@ -1,1 +1,10 @@
-[]
+[
+    {
+  "case_id": "C03",
+  "decision": "EDIT",
+  "ai_diagnosis": "The DNS server is unavailable, so hostname resolution is failing.",
+  "human_correction": "The PC has an incorrect default gateway configured.",
+  "reason": "The evidence shows a gateway mismatch, not a DNS failure.",
+  "evidence": "PC gateway does not match the router interface subnet."
+}
+]

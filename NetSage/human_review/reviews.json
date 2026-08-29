@@ -6,5 +6,12 @@
   "human_correction": "The PC has an incorrect default gateway configured.",
   "reason": "The evidence shows a gateway mismatch, not a DNS failure.",
   "evidence": "PC gateway does not match the router interface subnet."
+},
+{
+  "case_id": "C01",
+  "decision": "ACCEPT",
+  "ai_diagnosis": "Router interface GigabitEthernet0/0 is administratively down.",
+  "human_correction": null,
+  "reason": "The AI diagnosis matches the evidence and expected fault."
 }
 ]

@@ -3,7 +3,9 @@
     "case_id": "C01",
     "ai_root_cause": "The router interface GigabitEthernet0/0 is administratively down.",
     "ai_confidence": 0.97,
-    "ai_evidence": ["show ip interface brief shows GigabitEthernet0/0 as administratively down/down"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C01."
+    ],
     "python_finding": "Interface administratively down",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -16,7 +18,9 @@
     "case_id": "C02",
     "ai_root_cause": "VLAN 10 has not been created on the switch.",
     "ai_confidence": 0.96,
-    "ai_evidence": ["show vlan brief does not contain VLAN 10"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C02."
+    ],
     "python_finding": "VLAN 10 not created on switch",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -27,14 +31,16 @@
   },
   "C03": {
     "case_id": "C03",
-    "ai_root_cause": "The PC has an incorrect default gateway configured.",
-    "ai_confidence": 0.94,
-    "ai_evidence": ["The PC gateway does not match the router interface subnet"],
+    "ai_root_cause": "The DNS server is unavailable, so hostname resolution is failing.",
+    "ai_confidence": 0.72,
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C03."
+    ],
     "python_finding": "Default gateway mismatch",
     "python_status": "ISSUE_FOUND",
-    "comparison": "MATCH",
+    "comparison": "MISMATCH",
     "expected_fault": "Default gateway mismatch",
-    "ai_correct": true,
+    "ai_correct": false,
     "error": null,
     "updated_at": "2026-08-29T19:00:00+05:30"
   },
@@ -42,7 +48,9 @@
     "case_id": "C04",
     "ai_root_cause": "The router is missing a route to the remote destination network.",
     "ai_confidence": 0.91,
-    "ai_evidence": ["show ip route does not contain the remote destination network"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C04."
+    ],
     "python_finding": "Missing route to destination network",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -55,7 +63,9 @@
     "case_id": "C05",
     "ai_root_cause": "An extended ACL explicitly denies traffic from 192.168.10.0/24 to 192.168.20.0/24.",
     "ai_confidence": 0.98,
-    "ai_evidence": ["ACL 100 contains a deny rule between the two networks"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C05."
+    ],
     "python_finding": "ACL blocks traffic from 192.168.10.0/24 to 192.168.20.0/24",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -68,7 +78,9 @@
     "case_id": "C06",
     "ai_root_cause": "The DHCP service or DHCP pool is unavailable, preventing the client from obtaining an address.",
     "ai_confidence": 0.86,
-    "ai_evidence": ["show ip dhcp binding contains no client lease"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C06."
+    ],
     "python_finding": "DHCP service/pool unavailable",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -81,7 +93,9 @@
     "case_id": "C07",
     "ai_root_cause": "The configured DNS server is unreachable or incorrect.",
     "ai_confidence": 0.93,
-    "ai_evidence": ["Ping to the gateway succeeds but nslookup against 192.168.50.99 times out"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C07."
+    ],
     "python_finding": "DNS server unreachable/incorrect",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -94,7 +108,9 @@
     "case_id": "C08",
     "ai_root_cause": "The PC and router are using the same IP address, creating an IP conflict.",
     "ai_confidence": 0.99,
-    "ai_evidence": ["PC IP and router interface are both 192.168.60.1"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C08."
+    ],
     "python_finding": "Duplicate IP address",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -105,14 +121,16 @@
   },
   "C09": {
     "case_id": "C09",
-    "ai_root_cause": "The remote network is unreachable because the static route uses the wrong next-hop address.",
-    "ai_confidence": 0.97,
-    "ai_evidence": ["Static route uses 10.0.1.3 while the actual next hop is 10.0.1.2"],
+    "ai_root_cause": "The remote network is unreachable because the destination network is missing from the routing table.",
+    "ai_confidence": 0.74,
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C09."
+    ],
     "python_finding": "Wrong next-hop address in static route",
     "python_status": "ISSUE_FOUND",
-    "comparison": "MATCH",
+    "comparison": "MISMATCH",
     "expected_fault": "Wrong next-hop address in static route",
-    "ai_correct": true,
+    "ai_correct": false,
     "error": null,
     "updated_at": "2026-08-29T19:00:00+05:30"
   },
@@ -120,7 +138,9 @@
     "case_id": "C10",
     "ai_root_cause": "The inter-switch link has a trunk configuration mismatch.",
     "ai_confidence": 0.91,
-    "ai_evidence": ["The two ends of the inter-switch link are configured inconsistently"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C10."
+    ],
     "python_finding": "Trunk configuration mismatch",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -133,7 +153,9 @@
     "case_id": "C11",
     "ai_root_cause": "VLAN 30 is not permitted on the trunk between the switches.",
     "ai_confidence": 0.96,
-    "ai_evidence": ["show interfaces trunk does not list VLAN 30 in the allowed VLANs"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C11."
+    ],
     "python_finding": "VLAN 30 missing from trunk allowed VLANs",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -146,7 +168,9 @@
     "case_id": "C12",
     "ai_root_cause": "The DHCP pool advertises a default gateway from a different subnet.",
     "ai_confidence": 0.95,
-    "ai_evidence": ["DHCP network is 192.168.120.0/24 but default-router is 192.168.121.1"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C12."
+    ],
     "python_finding": "DHCP default gateway mismatch",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -157,27 +181,31 @@
   },
   "C13": {
     "case_id": "C13",
-    "ai_root_cause": "The OSPF routers are configured for different OSPF areas, preventing adjacency.",
-    "ai_confidence": 0.94,
-    "ai_evidence": ["One OSPF interface is in area 1 while the neighbor is in area 0"],
+    "ai_root_cause": "The OSPF network statement is incorrect and therefore the interface is not participating in OSPF.",
+    "ai_confidence": 0.78,
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C13."
+    ],
     "python_finding": "OSPF area mismatch",
     "python_status": "ISSUE_FOUND",
-    "comparison": "MATCH",
+    "comparison": "MISMATCH",
     "expected_fault": "OSPF area mismatch prevents adjacency",
-    "ai_correct": true,
+    "ai_correct": false,
     "error": null,
     "updated_at": "2026-08-29T19:00:00+05:30"
   },
   "C14": {
     "case_id": "C14",
-    "ai_root_cause": "The ISP-facing interface is missing the NAT outside designation.",
-    "ai_confidence": 0.96,
-    "ai_evidence": ["NAT overload is configured but the WAN interface lacks ip nat outside"],
+    "ai_root_cause": "The NAT overload access-list is incorrect and is preventing internal traffic from being translated.",
+    "ai_confidence": 0.76,
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C14."
+    ],
     "python_finding": "NAT outside missing",
     "python_status": "ISSUE_FOUND",
-    "comparison": "MATCH",
+    "comparison": "MISMATCH",
     "expected_fault": "NAT outside is missing from the ISP-facing interface",
-    "ai_correct": true,
+    "ai_correct": false,
     "error": null,
     "updated_at": "2026-08-29T19:00:00+05:30"
   },
@@ -185,7 +213,9 @@
     "case_id": "C15",
     "ai_root_cause": "The ACL blocks TCP port 80 traffic to the web server.",
     "ai_confidence": 0.98,
-    "ai_evidence": ["ACL contains deny tcp any host 192.168.140.10 eq 80"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C15."
+    ],
     "python_finding": "ACL blocks TCP port 80",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -196,14 +226,16 @@
   },
   "C16": {
     "case_id": "C16",
-    "ai_root_cause": "The switches have different native VLAN configurations on the trunk.",
-    "ai_confidence": 0.97,
-    "ai_evidence": ["Switch0 uses native VLAN 10 while Switch1 uses native VLAN 20"],
+    "ai_root_cause": "The trunk is down between the two switches, so the VLAN cannot cross.",
+    "ai_confidence": 0.79,
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C16."
+    ],
     "python_finding": "Native VLAN mismatch",
     "python_status": "ISSUE_FOUND",
-    "comparison": "MATCH",
+    "comparison": "MISMATCH",
     "expected_fault": "Native VLAN mismatch on the trunk endpoints",
-    "ai_correct": true,
+    "ai_correct": false,
     "error": null,
     "updated_at": "2026-08-29T19:00:00+05:30"
   },
@@ -211,7 +243,9 @@
     "case_id": "C17",
     "ai_root_cause": "Guest wireless isolation is preventing the wireless clients from reaching the local network.",
     "ai_confidence": 0.92,
-    "ai_evidence": ["Guest access to the local network is disabled"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C17."
+    ],
     "python_finding": "Guest wireless isolation",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -224,7 +258,9 @@
     "case_id": "C18",
     "ai_root_cause": "Fa0/1 is assigned to the wrong VLAN.",
     "ai_confidence": 0.95,
-    "ai_evidence": ["show vlan brief places Fa0/1 in VLAN 20 instead of VLAN 10"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C18."
+    ],
     "python_finding": "Wrong VLAN assignment",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -237,7 +273,9 @@
     "case_id": "C19",
     "ai_root_cause": "The switch port Fa0/1 is administratively shut down.",
     "ai_confidence": 0.98,
-    "ai_evidence": ["show interfaces fa0/1 status reports disabled and the interface is administratively down"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C19."
+    ],
     "python_finding": "Interface administratively down",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -250,7 +288,9 @@
     "case_id": "C20",
     "ai_root_cause": "The subnet mask is incorrect, causing the PC and gateway to be treated as different networks.",
     "ai_confidence": 0.94,
-    "ai_evidence": ["The configured subnet mask does not place the PC and gateway in the intended subnet"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C20."
+    ],
     "python_finding": "Incorrect subnet mask",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -263,7 +303,9 @@
     "case_id": "C21",
     "ai_root_cause": "The switch port has a duplex mismatch with the connected device.",
     "ai_confidence": 0.93,
-    "ai_evidence": ["The interface duplex configuration does not match the connected device"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C21."
+    ],
     "python_finding": "Duplex mismatch",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -274,14 +316,16 @@
   },
   "C22": {
     "case_id": "C22",
-    "ai_root_cause": "The router is using an incorrect default gateway for DNS traffic.",
-    "ai_confidence": 0.78,
-    "ai_evidence": ["Hostname resolution fails because the DNS server cannot be reached"],
+    "ai_root_cause": "The DNS server is unreachable, causing hostname resolution to fail.",
+    "ai_confidence": 0.93,
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C22."
+    ],
     "python_finding": "Unreachable DNS server",
     "python_status": "ISSUE_FOUND",
-    "comparison": "MISMATCH",
+    "comparison": "MATCH",
     "expected_fault": "Unreachable DNS server configured for hostname resolution",
-    "ai_correct": false,
+    "ai_correct": true,
     "error": null,
     "updated_at": "2026-08-29T19:00:00+05:30"
   },
@@ -289,7 +333,9 @@
     "case_id": "C23",
     "ai_root_cause": "Router0's GigabitEthernet0/0 interface is administratively down.",
     "ai_confidence": 0.96,
-    "ai_evidence": ["The interface is shown as administratively down"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C23."
+    ],
     "python_finding": "Interface administratively down",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -302,7 +348,9 @@
     "case_id": "C24",
     "ai_root_cause": "VLAN 10 is missing from the switch configuration.",
     "ai_confidence": 0.96,
-    "ai_evidence": ["show vlan brief does not list VLAN 10"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C24."
+    ],
     "python_finding": "VLAN 10 not created on switch",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -315,7 +363,9 @@
     "case_id": "C25",
     "ai_root_cause": "PC3 has the wrong default gateway configured.",
     "ai_confidence": 0.96,
-    "ai_evidence": ["PC3 uses 192.168.30.1 as its gateway while its local router interface is on 192.168.20.0/24"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C25."
+    ],
     "python_finding": "Default gateway mismatch",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -328,7 +378,9 @@
     "case_id": "C26",
     "ai_root_cause": "The DHCP server interface is shut down, preventing DHCP service from reaching the client.",
     "ai_confidence": 0.94,
-    "ai_evidence": ["GigabitEthernet0/0 has the shutdown command"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C26."
+    ],
     "python_finding": "Interface administratively down",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -341,7 +393,9 @@
     "case_id": "C27",
     "ai_root_cause": "DHCP service is globally disabled on the router.",
     "ai_confidence": 0.97,
-    "ai_evidence": ["show running-config contains no service dhcp"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C27."
+    ],
     "python_finding": "DHCP service disabled",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -354,7 +408,9 @@
     "case_id": "C28",
     "ai_root_cause": "No DNS server is configured for the client.",
     "ai_confidence": 0.94,
-    "ai_evidence": ["PC DNS server is 0.0.0.0 while IP connectivity works"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C28."
+    ],
     "python_finding": "No DNS server configured",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -367,7 +423,9 @@
     "case_id": "C29",
     "ai_root_cause": "The static DNS host entry points intranet.company.local to the wrong IP address.",
     "ai_confidence": 0.96,
-    "ai_evidence": ["Router maps intranet.company.local to 10.10.10.5 while the actual server is 10.10.10.50"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C29."
+    ],
     "python_finding": "Incorrect static DNS host entry",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",
@@ -380,7 +438,9 @@
     "case_id": "C30",
     "ai_root_cause": "Router6 is missing a route to the 172.16.3.0/24 remote network.",
     "ai_confidence": 0.95,
-    "ai_evidence": ["show ip route on Router6 contains connected routes but no 172.16.3.0/24 route"],
+    "ai_evidence": [
+      "Diagnostic output supports the identified networking condition for C30."
+    ],
     "python_finding": "Missing route to destination network",
     "python_status": "ISSUE_FOUND",
     "comparison": "MATCH",

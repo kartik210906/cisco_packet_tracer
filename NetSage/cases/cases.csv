@@ -1,0 +1,84 @@
+case_id,symptom,topology,show_outputs,expected_fault,osi_layer,concept,severity
+C01,PC cannot reach the router; ping to the router fails.,PC0-Switch0-Router0,"show ip interface brief
+GigabitEthernet0/0
+192.168.10.1
+administratively down down",Router interface administratively down,Layer 1,Interface state,High
+C02,Devices assigned to VLAN 10 cannot communicate because VLAN 10 is missing.,PC0-PC1-Switch0,"show vlan brief
+VLAN 10 is absent",VLAN 10 does not exist on the switch,Layer 2,VLAN configuration,High
+C03,PC can reach the local gateway but cannot reach the intended remote network.,PC-Switch-Router,PC default gateway is configured with the wrong address,Default gateway mismatch,Layer 3,Default gateway,High
+C04,A route to the remote network is absent from the routing table.,PC-Router0-Router1-Remote LAN,"show ip route
+Remote destination network is not present",Missing route to the remote network,Layer 3,Static/dynamic routing,High
+C05,PC in 192.168.10.0/24 cannot reach a host in 192.168.20.0/24 while other traffic is permitted.,PC-Switch-Router-Router/Remote LAN,"show access-lists
+Extended IP access list 100
+10 deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+20 permit ip any any",ACL blocks traffic from 192.168.10.0/24 to 192.168.20.0/24,Layer 3,Access Control Lists,High
+C06,Client cannot obtain an IP address automatically.,PC0-Switch-Router (DHCP server),"show ip dhcp binding
+(no client leases listed)","DHCP service/pool is unavailable, so the client cannot obtain a lease",Layer 7,DHCP service availability,High
+C07,"IP connectivity works, but DNS name resolution times out.",PC0-Switch-Router,"ping 192.168.50.1 -> 0% loss
+nslookup example.com
+Server: 192.168.50.99
+DNS request timed out",Incorrect/unreachable DNS server configured on the client,Layer 7,DNS resolution,Medium
+C08,"PC uses the same IP address as the router, causing an address conflict.",PC0-Switch0-Router0,"PC IP address: 192.168.60.1
+Router interface: 192.168.60.1/24",Duplicate IP address / IP address conflict,Layer 3,IP addressing,High
+C09,PC cannot reach the remote LAN because the static route points to an incorrect next hop.,PC0-Router0-Router1-PC1,"show ip route
+S 192.168.80.0/24 [1/0] via 10.0.1.3
+Actual Router1 next hop: 10.0.1.2
+ping 192.168.80.10 -> Request timed out",Wrong next-hop address in static route,Layer 3,Static routing,High
+C10,VLAN traffic does not cross the inter-switch link because the two ends are configured inconsistently.,PC0-Switch0-Switch1-PC1,Inter-switch interfaces have mismatched trunk/access configuration,Trunk misconfiguration on the inter-switch link,Layer 2,Trunking,High
+C11,PC can reach its default gateway but cannot reach a server in another VLAN.,PC VLAN10 - Switch - trunk - Router-on-a-stick - Server VLAN30,show interfaces trunk: VLAN 30 is not in the allowed VLAN list,VLAN 30 is missing from the trunk allowed-VLAN list,Layer 2,802.1Q trunk allowed VLANs,High
+C12,Clients receive DHCP addresses but cannot communicate outside their local subnet.,PCs - Switch - Router DHCP server,show ip dhcp pool: network 192.168.120.0/24; default-router 192.168.121.1,DHCP pool advertises a default gateway from the wrong subnet,Layer 3/7,DHCP default-router option,High
+C13,"OSPF is enabled on both routers, but no neighbor relationship forms.","RouterA - RouterB, OSPF area 0",show ip ospf neighbor: no neighbors; one interface is in area 1 while the neighbor is in area 0,OSPF area mismatch prevents adjacency,Layer 3,OSPF area configuration,High
+C14,"NAT is configured and the ISP link is up, but internal clients cannot access the internet.",LAN - Router - ISP,show ip nat translations: none; NAT overload configured; ISP-facing interface has no ip nat outside,NAT outside is missing from the ISP-facing interface,Layer 3,NAT inside/outside roles,High
+C15,"Users can reach the web server by IP, but HTTP connections fail while other traffic is allowed.",Client - Router - Web Server,show access-lists: deny tcp any host 192.168.140.10 eq 80 followed by permit ip any any,Extended ACL explicitly denies TCP port 80 to the web server,Layer 4,Extended ACL port filtering,High
+C16,"Two switches have the same VLAN, but hosts cannot communicate across the inter-switch link.",PC - Switch0 - trunk - Switch1 - PC,show interfaces trunk: Switch0 native VLAN 10; Switch1 native VLAN 20; CDP reports native VLAN mismatch,Native VLAN mismatch on the trunk endpoints,Layer 2,802.1Q native VLAN,High
+C17,Wireless clients connect to the SSID but cannot reach devices on the local network.,Laptop - Guest WiFi - Wireless Router - LAN,Guest Network enabled; Allow guests to access local network = Disabled,Guest wireless isolation prevents access to the internal/local network,Layer 2/3,Wireless guest isolation,Medium
+C18,A PC connected to Fa0/1 is placed in the wrong VLAN.,PC0-Switch0,"show vlan brief
+10 USERS active
+20 SERVERS active Fa0/1",Switch access port is assigned to the wrong VLAN,Layer 2,VLAN assignment,High
+C19,A PC connected to Fa0/1 loses connectivity because the switch port is disabled.,PC0-Switch0,"show interfaces fa0/1 status
+Fa0/1 disabled
+show interfaces fa0/1
+FastEthernet0/1 is administratively down",Switch port is administratively shut down,Layer 1,Interface state,High
+C20,PC cannot communicate because its subnet mask places it in the wrong network.,PC0-Switch0-Router0,"PC IP: 192.168.110.10
+Subnet mask: 255.255.255.128
+Gateway: 192.168.110.200",Incorrect subnet mask causes the host and gateway to be treated as being in different subnets,Layer 3,Subnetting,High
+C21,"A switch interface is configured for the wrong duplex mode, causing communication problems and collisions.",PC0-Switch0,"show interfaces fa0/2 status
+Duplex setting does not match the connected device",Duplex mismatch on the switch port,Layer 2,Ethernet duplex,Medium
+C22,The router cannot resolve a hostname because an incorrect DNS server is configured for name lookup.,PC0-Switch0-Router0,"PC can ping its gateway, but hostname lookup fails against an unreachable DNS server",Unreachable DNS server configured for hostname resolution,Layer 7,DNS,Medium
+C23,PC0 cannot reach Router0; ping fails with 'Request timed out'.,"PC0-Switch0, Switch0-Router0(Gig0/0)","show ip interface brief
+GigabitEthernet0/0
+192.168.10.1
+administratively down
+down",Interface administratively down,Layer 1,Interface state,High
+C24,PC1 and PC2 are on the same VLAN 10 but cannot ping each other.,"PC1-Switch0, PC2-Switch0","show vlan brief
+VLAN Name      Status
+1    default   active
+20   Sales     active
+PC1 and PC2 switchports are configured with 'switchport access vlan 10'",VLAN 10 does not exist on the switch,Layer 2,VLAN configuration,High
+C25,PC3 can ping other devices on its own subnet but cannot reach any remote network.,PC3-Switch1-Router1,"show running-config
+interface GigabitEthernet0/1
+ ip address 192.168.20.1 255.255.255.0
+PC3 config: IP 192.168.20.25, Subnet 255.255.255.0, Default Gateway 192.168.30.1",Default gateway mismatch,Layer 3,Default gateway,High
+C26,New laptop on the LAN does not receive an IP address automatically.,Laptop0-Switch2-Router2(DHCP server),"show running-config | section dhcp
+ip dhcp pool LAN_POOL
+ network 192.168.40.0 255.255.255.0
+ default-router 192.168.40.1
+interface GigabitEthernet0/0
+ ip address 192.168.40.1 255.255.255.0
+ shutdown",DHCP server interface is shut down,Layer 1/7,DHCP service availability,Medium
+C27,Devices in the branch office all receive IP addresses in the wrong subnet (169.254.x.x).,"PC4,PC5-Switch3-Router3(DHCP relay)","show running-config | section dhcp
+no service dhcp
+ip dhcp pool BRANCH
+ network 192.168.50.0 255.255.255.0
+ default-router 192.168.50.1",DHCP service is globally disabled on the router,Layer 7,DHCP service configuration,High
+C28,Users can browse the internet by IP address but 'www.example.com' fails to resolve.,PC6-Switch4-Router4-Internet,"show running-config | include dns
+no ip domain-lookup
+PC6 IPCONFIG: DNS Server: 0.0.0.0
+ping 8.8.8.8 -> Success rate is 100 percent",No DNS server configured on client/router,Layer 7,DNS resolution,Medium
+C29,Internal users report that 'intranet.company.local' resolves to the wrong IP address.,PC7-Switch5-Router5(local DNS),"show running-config | section dns
+ip host intranet.company.local 10.10.10.5
+Actual intranet server IP is 10.10.10.50 per topology notes",Incorrect static DNS host entry on router,Layer 7,DNS host mapping,Medium
+C30,PC8 on network 172.16.1.0/24 cannot reach a server on network 172.16.3.0/24 through two routers.,PC8-Router6-Router7-Server(172.16.3.10),"show ip route (Router6)
+C    172.16.1.0/24 is directly connected, GigabitEthernet0/0
+C    172.16.2.0/24 is directly connected, GigabitEthernet0/1
+destination network: 172.16.3.0",Missing route to 172.16.3.0/24 on Router6,Layer 3,Static/dynamic routing,High

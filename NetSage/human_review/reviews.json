@@ -1,17 +1,23 @@
 [
-    {
-  "case_id": "C03",
-  "decision": "EDIT",
-  "ai_diagnosis": "The DNS server is unavailable, so hostname resolution is failing.",
-  "human_correction": "The PC has an incorrect default gateway configured.",
-  "reason": "The evidence shows a gateway mismatch, not a DNS failure.",
-  "evidence": "PC gateway does not match the router interface subnet."
-},
-{
-  "case_id": "C01",
-  "decision": "ACCEPT",
-  "ai_diagnosis": "Router interface GigabitEthernet0/0 is administratively down.",
-  "human_correction": null,
-  "reason": "The AI diagnosis matches the evidence and expected fault."
-}
+  {
+    "case_id": "C03",
+    "decision": "EDIT",
+    "ai_diagnosis": "The DNS server is unavailable, so hostname resolution is failing.",
+    "human_correction": "The PC has an incorrect default gateway configured.",
+    "reason": "The evidence shows a gateway mismatch, not a DNS failure.",
+    "evidence": "PC gateway does not match the router interface subnet."
+  },
+  {
+    "case_id": "C01",
+    "decision": "ACCEPT",
+    "ai_diagnosis": "Router interface GigabitEthernet0/0 is administratively down.",
+    "human_correction": null,
+    "reason": "The AI diagnosis matches the evidence and expected fault."
+  },
+  {
+    "case_ref": "PC cannot reach the router gateway.",
+    "decision": "ACCEPT",
+    "ai_root_cause": "The router interface GigabitEthernet0/0, which acts as the default gateway (192.168.10.1) for PC0, is administratively down.",
+    "timestamp": "2026-08-29T14:49:50.126363+00:00"
+  }
 ]
